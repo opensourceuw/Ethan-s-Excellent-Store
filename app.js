@@ -34,20 +34,11 @@ let db_url = 'mongodb://127.0.0.1:27017/store';
 mongoose.connect(db_url);
 console.log(SUCCESS + " mongoDB ready ...");
 
-
 console.log(SUCCESS + " applying router middleware ...");
 app.use('/', Index);
-app.use('/posts', Posts);
-app.use('/pages', Page);
-app.use('/category', Category);
-app.use('/author', Author);
+app.use('/account', Account);
+app.use('/products', Products);
+app.use('/admin', Admin);
 console.log(SUCCESS + " server started success! API serving ... ");
 
 module.exports = app;
-
-
-// app.use((req, res, next) => {
-// 	let err = new Error ("Not Found");
-// 	err.status = 404;
-// 	next(err);
-// });
