@@ -5,6 +5,8 @@ import mongoose from 'mongoose';
 import {User} from '../util/schema';
 import handleError from '../util/error';
 
+import md5 from 'md5';
+
 // Login
 router.post ("/login", (req, res) => {
 	let { email, passwd} = req.body;
@@ -32,15 +34,29 @@ router.post ("/register", (req, res) => {
 	let {name, email, passwd, profile, 
 			admin, lists} = req.body;
 
-	const User = new User ({
-		name: name, email: email, passwd: passwd,
-		profile: JSON.parse(profile), admin: admin, 
-		lists: JSON.parse(lists)
-	});
+	const  newUser = new User();
 
-	User.save (err => {
+	newUser.name = name;
+	newUser.email = email;
+	newUser.passwd = passwd;
+	newUser.profile = JSON.parse(profile);
+	newUser.admin = admin;
+	newUser.lists = JSON.parse(lists);
+
+	User.findOne({email: email}, (err,doc) => {
 		if (err) handleError (err, req, res);
-		else res.send ("success ... ");
+		if (doc != null) {
+			console.error("User email already exist");
+			res.send("User email already exist");
+		} else {
+			newUser.save((err) => {
+				if(err) handleError (err, req, res);
+				else {
+					console.log("successfully registered");
+					res.send ("success ... ");
+				}
+			});
+		}
 	});
 });
 
@@ -57,8 +73,11 @@ router.post("/password", (req, res) => {
 			doc.save((err) => {
 				if (err) handleError (err, req, res);
 				else {
-					doc.passwd = "123456";
-					res.send(doc._id);
+					doc.passwd = md5("123456");
+					doc.save(err => {
+						if (err) handleError(err, req, res);
+						else res.send("password has been set as default")
+					});
 				};
 			})
 		}
@@ -67,4 +86,4 @@ router.post("/password", (req, res) => {
 
 
 
-
+export default router;

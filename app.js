@@ -30,7 +30,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 
-let db_url = 'mongodb://127.0.0.1:27017/store';
+let db_url = 'mongodb://127.0.0.1:27017 /store';
 mongoose.connect(db_url);
 console.log(SUCCESS + " mongoDB ready ...");
 

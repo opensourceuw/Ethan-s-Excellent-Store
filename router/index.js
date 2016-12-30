@@ -5,4 +5,4 @@ router.get('/', (req, res) => {
 	console.log("Project successfully build")
 });
 
-module.exports = router
+export default router;
