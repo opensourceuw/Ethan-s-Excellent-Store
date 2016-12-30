@@ -35,11 +35,11 @@ HistorySchema.plugin(deepPopulate);
 ShoppingListSchema.plugin(deepPopulate);
 OrderSchema.plugin(deepPopulate);
 
-const User = mongoose.model('user', CategorySchema);
-const Product = mongoose.model('product', AuthorSchema);
-const History = mongoose.model('history', PostSchema);
+const User = mongoose.model('user', UserSchema);
+const Product = mongoose.model('product', ProductSchema);
+const History = mongoose.model('history', HistorySchema);
 const ShoppingList = mongoose.model('lists', ShoppingListSchema);
-const Order = mongoose.model('order', PageSchema);
+const Order = mongoose.model('order', OrderSchema);
 
 // export module
 export {User, Product, History, ShoppingList, Order};
