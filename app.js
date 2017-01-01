@@ -8,10 +8,10 @@ import colors from 'colors';
 import cors from 'cors';
 
 import Index from './router/index';
-import Posts from './router/posts';
-import Page from './router/page';
-import Category from './router/category';
-import Author from './router/author';
+import Account from './router/account';
+import Admin from './router/admin';
+import Products from './router/products';
+
 
 let app = express ();
 const SUCCESS = '[SUCCESS]'.green;
@@ -30,7 +30,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 
-let db_url = 'mongodb://127.0.0.1:27017/store';
+let db_url = 'mongodb://127.0.0.1:27017 /store';
 mongoose.connect(db_url);
 console.log(SUCCESS + " mongoDB ready ...");
 
